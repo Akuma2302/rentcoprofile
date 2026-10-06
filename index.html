@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RentCo — Rent what you need. Earn from what you own.</title>
+<meta name="description" content="RentCo is a trusted peer-to-peer rental marketplace for campus communities in Malaysia. List what you own, rent what you need, and earn from idle items.">
+<meta property="og:title" content="RentCo — What You Have, Someone Needs.">
+<meta property="og:description" content="A trusted peer-to-peer rental marketplace that connects people who have underutilized items with those who need temporary access.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b5fff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0a1535;
+  --navy-2: #12224f;
+  --blue: #0b5fff;
+  --blue-dark: #0848c9;
+  --blue-soft: #e6efff;
+  --bg: #f5f8ff;
+  --card: #ffffff;
+  --line: #dbe5f7;
+  --text: #0a1535;
+  --muted: #4a5878;
+  --ok: #12a150;
+  --no: #d92d3a;
+  --radius: 20px;
+  --shadow: 0 1px 2px rgba(10, 21, 53, .05), 0 12px 32px -12px rgba(10, 21, 53, .16);
+  --font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; font-family: var(--font); color: var(--text); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; line-height: 1.08; letter-spacing: -.025em; font-weight: 800; text-wrap: balance; }
+h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); }
+h2 { font-size: clamp(1.9rem, 4.6vw, 3.1rem); }
+h3 { font-size: 1.2rem; letter-spacing: -.01em; line-height: 1.25; }
+p { margin: 0; text-wrap: pretty; }
+.blue { color: var(--blue); }
+.wrap { width: min(1160px, 100% - 40px); margin-inline: auto; }
+section { padding: clamp(64px, 9vw, 112px) 0; }
+.eyebrow { font-size: .78rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+.lede { font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--muted); max-width: 62ch; margin-top: 18px; }
+.head { margin-bottom: clamp(32px, 5vw, 56px); }
+.script { font-family: "Caveat", cursive; font-weight: 600; color: var(--blue); font-size: 1.9rem; line-height: 1; transform: rotate(-4deg); display: inline-block; }
+.icon { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.badge { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--blue-soft); color: var(--blue); flex: none; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+.skip { position: absolute; left: -999px; top: 8px; background: #fff; padding: 10px 16px; border-radius: 8px; z-index: 100; }
+.skip:focus { left: 8px; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 26px; border: 0; border-radius: 14px; background: var(--blue); color: #fff; font: 700 1rem var(--font); text-decoration: none; cursor: pointer; transition: background .15s, transform .15s; white-space: nowrap; }
+.btn:hover { background: var(--blue-dark); }
+.btn:active { transform: translateY(1px); }
+.btn.small { min-height: 44px; padding: 0 18px; font-size: .95rem; border-radius: 12px; }
+.btn.light { background: #fff; color: var(--navy); }
+.btn.light:hover { background: var(--blue-soft); }
+
+/* Nav */
+header.nav { position: sticky; top: 0; z-index: 50; background: rgba(245, 248, 255, .86); backdrop-filter: saturate(160%) blur(14px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+header.nav.stuck { border-color: var(--line); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 20px; }
+.logo { font-weight: 800; font-size: 1.6rem; letter-spacing: -.04em; text-decoration: none; line-height: 1; }
+.logo small { display: block; font-size: .56rem; font-weight: 600; letter-spacing: .14em; color: var(--muted); margin-top: 3px; }
+.nav nav { display: none; gap: 28px; }
+.nav nav a { text-decoration: none; font-weight: 600; font-size: .95rem; color: var(--muted); padding: 12px 0; }
+.nav nav a:hover { color: var(--navy); }
+@media (min-width: 860px) { .nav nav { display: flex; } }
+
+/* Hero */
+.hero { padding-top: clamp(40px, 6vw, 72px); overflow: hidden; background: radial-gradient(900px 600px at 85% 10%, #dbe8ff 0%, transparent 60%), radial-gradient(700px 500px at 0% 100%, #e8f0ff 0%, transparent 60%); }
+.hero .wrap { display: grid; gap: 48px; align-items: center; }
+.hero .tag { font-size: clamp(1.3rem, 2.4vw, 1.75rem); font-weight: 600; color: var(--muted); margin-top: 18px; letter-spacing: -.01em; }
+.hero .tag::after { content: ""; display: block; width: 72px; height: 5px; border-radius: 3px; background: var(--blue); margin-top: 18px; }
+.triad { margin-top: 36px; font-size: .74rem; font-weight: 700; letter-spacing: .22em; color: var(--muted); }
+@media (min-width: 960px) { .hero .wrap { grid-template-columns: 1.1fr .9fr; } }
+
+/* Signup form */
+.signup { margin-top: 30px; max-width: 600px; }
+.signup .row { display: grid; gap: 10px; }
+.signup label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.signup input, .signup select { width: 100%; min-height: 52px; padding: 0 16px; border: 1.5px solid var(--line); border-radius: 14px; background: #fff; font: 500 1rem var(--font); color: var(--text); }
+.signup input:focus, .signup select:focus { outline: 0; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(11, 95, 255, .15); }
+.signup input[aria-invalid="true"] { border-color: var(--no); }
+.signup .note { font-size: .85rem; color: var(--muted); margin-top: 10px; }
+.signup .status { font-size: .92rem; font-weight: 600; margin-top: 10px; min-height: 1.4em; }
+.signup .status.err { color: var(--no); }
+.signup .status.ok { color: var(--ok); }
+@media (min-width: 640px) { .signup .row { grid-template-columns: 1fr 150px auto; } }
+.dark .signup input, .dark .signup select { border-color: transparent; }
+.dark .signup .note { color: #b9c6e6; }
+.dark .signup .status.err { color: #ff9aa2; }
+.dark .signup .status.ok { color: #7ee2a8; }
+
+/* Phone mock */
+.stage { position: relative; display: grid; place-items: center; }
+.phone { width: min(310px, 82vw); aspect-ratio: 310 / 630; border-radius: 46px; background: #0d1326; padding: 10px; box-shadow: 0 40px 80px -30px rgba(10, 21, 53, .5), 0 0 0 1.5px #2a3350 inset; transform: rotate(3deg); }
+.screen { height: 100%; border-radius: 37px; background: #fff; overflow: hidden; display: flex; flex-direction: column; position: relative; font-size: 12px; line-height: 1.3; }
+.screen::before { content: ""; position: absolute; top: 10px; left: 50%; translate: -50% 0; width: 84px; height: 24px; border-radius: 14px; background: #0d1326; }
+.app { padding: 48px 16px 0; flex: 1; }
+.app .top { display: flex; justify-content: space-between; align-items: center; }
+.app .top b { font-size: 21px; letter-spacing: -.04em; font-weight: 800; }
+.app .top .icon { width: 18px; height: 18px; }
+.app .search { margin-top: 12px; background: #f1f5fc; border-radius: 11px; padding: 10px 12px; color: #7b88a6; display: flex; gap: 8px; align-items: center; }
+.app .search .icon { width: 14px; height: 14px; }
+.app .cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 16px; text-align: center; font-weight: 600; font-size: 10.5px; }
+.app .cats span { display: grid; place-items: center; height: 46px; border-radius: 12px; background: #f1f5fc; color: var(--navy); margin-bottom: 5px; }
+.app .cats .icon { width: 20px; height: 20px; stroke-width: 1.6; }
+.app .row { display: flex; justify-content: space-between; align-items: baseline; margin: 18px 0 10px; font-weight: 800; font-size: 14px; }
+.app .row em { font-style: normal; font-size: 11px; color: var(--blue); font-weight: 700; }
+.app .items { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.app .items img { border-radius: 12px; height: 92px; width: 100%; object-fit: cover; }
+.app .items b { display: block; margin-top: 7px; font-size: 12px; }
+.app .items i { font-style: normal; color: var(--blue); font-weight: 700; font-size: 11.5px; }
+.app .items i span { color: #7b88a6; font-weight: 500; }
+.tabs { display: grid; grid-template-columns: repeat(5, 1fr); padding: 10px 8px 16px; border-top: 1px solid #edf1f9; text-align: center; font-size: 9.5px; color: #7b88a6; font-weight: 600; }
+.tabs div { display: grid; justify-items: center; gap: 3px; }
+.tabs .icon { width: 18px; height: 18px; }
+.tabs .on { color: var(--blue); }
+.tabs .plus { width: 36px; height: 36px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; margin-top: -18px; box-shadow: 0 6px 14px -4px rgba(11, 95, 255, .7); }
+.float { position: absolute; background: #fff; border-radius: 16px; box-shadow: var(--shadow); padding: 12px 16px; font-size: .88rem; font-weight: 700; display: flex; align-items: center; gap: 10px; line-height: 1.25; }
+.float small { display: block; font-weight: 500; color: var(--muted); font-size: .78rem; }
+.float .badge { width: 36px; height: 36px; }
+.float .icon { width: 18px; height: 18px; }
+.float.one { top: 66%; left: -40px; display: none; }
+.float.two { top: 4%; right: -6px; }
+.stage .cap { position: absolute; bottom: -34px; font-size: .78rem; color: var(--muted); }
+@media (min-width: 960px) { .float.one { display: flex; } }
+
+/* Cards & grids */
+.grid { display: grid; gap: 20px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+.card p { color: var(--muted); margin-top: 8px; }
+@media (min-width: 720px) { .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 720px) and (max-width: 1019px) { .g4 { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1020px) { .g4 { grid-template-columns: repeat(4, 1fr); } }
+
+/* Problem */
+.pair { padding: 12px; }
+.pair figure { margin: 0; position: relative; border-radius: 14px; overflow: hidden; }
+.pair img { width: 100%; aspect-ratio: 2.1 / 1; object-fit: cover; }
+.pair figcaption { position: absolute; inset: auto 0 0 0; padding: 26px 14px 10px; color: #fff; font-weight: 700; font-size: .95rem; background: linear-gradient(transparent, rgba(6, 12, 32, .82)); }
+.pair .to { display: flex; align-items: center; gap: 8px; padding: 9px 4px; font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--blue); }
+.pair .to .icon { width: 16px; height: 16px; transform: rotate(90deg); }
+.pains { margin-top: 20px; display: grid; gap: 4px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px; }
+.pains div { display: flex; align-items: center; gap: 14px; padding: 14px 16px; font-weight: 700; }
+@media (min-width: 820px) { .pains { grid-template-columns: repeat(3, 1fr); } .pains div + div { border-left: 1px solid var(--line); } }
+.claim { text-align: center; margin-top: 44px; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.2; }
+
+/* Steps */
+.white { background: #fff; }
+.step { position: relative; padding-top: 36px; }
+.step .n { position: absolute; top: -18px; left: 24px; width: 40px; height: 40px; border-radius: 50%; background: var(--blue); color: #fff; font-weight: 800; display: grid; place-items: center; box-shadow: 0 0 0 5px #fff; }
+.step .icon { width: 38px; height: 38px; color: var(--blue); stroke-width: 1.5; margin-bottom: 14px; }
+.step h3 { text-transform: uppercase; letter-spacing: .04em; font-size: 1.05rem; }
+.cats-list { display: flex; gap: 10px; margin-top: 44px; padding: 0 0 4px; list-style: none; overflow-x: auto; scrollbar-width: none; }
+.cats-list::-webkit-scrollbar { display: none; }
+.cats-list li { display: flex; align-items: center; gap: 10px; background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px 10px 14px; font-weight: 600; font-size: .95rem; white-space: nowrap; flex: none; }
+.cats-list .icon { width: 20px; height: 20px; color: var(--blue); }
+@media (min-width: 1200px) {
+  .cats-list { gap: 5px; justify-content: space-between; overflow: visible; }
+  .cats-list li { gap: 5px; padding: 9px 10px; font-size: .77rem; letter-spacing: -.01em; }
+  .cats-list .icon { width: 15px; height: 15px; }
+}
+.cats-title { margin-top: 56px; font-size: .78rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+
+/* Two sides */
+.side ul { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 12px; }
+.side li { display: flex; gap: 12px; align-items: flex-start; color: var(--muted); }
+.side li .icon { width: 22px; height: 22px; color: var(--blue); margin-top: 2px; }
+.side.owner { background: var(--navy); color: #fff; border-color: var(--navy); }
+.side.owner p, .side.owner li { color: #c3cfee; }
+.side.owner li .icon { color: #7fb0ff; }
+.split { margin-top: 24px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; background: var(--navy-2); border-radius: 16px; padding: 18px; text-align: center; }
+.split b { display: block; font-size: clamp(1.5rem, 4vw, 2.1rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; color: #fff; }
+.split span { font-size: .82rem; color: #c3cfee; }
+.split .icon { color: #7fb0ff; }
+.fine { font-size: .8rem; margin-top: 10px; opacity: .8; }
+.both { margin-top: 20px; display: flex; gap: 18px; align-items: center; background: var(--blue-soft); border: 1.5px solid #bcd3ff; border-radius: var(--radius); padding: 22px 26px; }
+.both .badge { background: #fff; }
+.both p { color: var(--muted); margin-top: 6px; }
+@media (max-width: 560px) { .both { flex-direction: column; align-items: flex-start; } }
+.cta-line { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 22px; }
+.cta-line span { color: var(--muted); font-weight: 500; }
+
+/* Campus */
+.why { display: grid; gap: 0; padding: 8px 28px; }
+.why div { display: flex; gap: 16px; padding: 20px 0; align-items: flex-start; }
+.why div + div { border-top: 1px solid var(--line); }
+.why p { margin-top: 2px; }
+.mini h3 { font-size: 1.05rem; }
+.mini { padding: 22px; display: flex; gap: 14px; align-items: flex-start; }
+.mini p { margin-top: 2px; font-size: .95rem; }
+.campus { display: grid; gap: 20px; align-items: start; }
+@media (min-width: 960px) { .campus { grid-template-columns: 1.25fr 1fr; } }
+
+/* Compare */
+.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--line); background: #fff; }
+table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: .93rem; }
+th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td, tr:last-child th { border-bottom: 0; }
+thead th { background: var(--navy); color: #fff; font-weight: 700; font-size: .9rem; }
+thead th:first-child { background: #e9eef9; color: var(--navy); }
+thead th.us { background: var(--blue); font-size: 1.15rem; letter-spacing: -.03em; font-weight: 800; }
+tbody th { font-weight: 700; white-space: nowrap; }
+td { color: var(--muted); }
+td.us { background: #f0f5ff; color: var(--navy); font-weight: 600; }
+td::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 9px; background: #9aa6c0; }
+td.y::before { background: var(--ok); }
+td.n::before { background: var(--no); }
+.legend { font-size: .82rem; color: var(--muted); margin-top: 12px; }
+.legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin: 0 6px 0 14px; }
+.legend i:first-child { margin-left: 0; }
+
+/* FAQ */
+.faq { max-width: 800px; }
+details { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; list-style: none; padding: 22px 40px 22px 0; font-weight: 700; font-size: 1.1rem; position: relative; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; position: absolute; right: 4px; top: 50%; translate: 0 -50%; font-size: 1.6rem; font-weight: 500; color: var(--blue); transition: rotate .2s; }
+details[open] summary::after { rotate: 45deg; }
+details p { color: var(--muted); padding: 0 40px 24px 0; }
+
+/* Final */
+.dark { background: var(--navy); color: #fff; }
+.final .wrap { display: grid; gap: 40px; align-items: center; }
+.final .lede { color: #c3cfee; }
+.final .script { color: #7fb0ff; margin-bottom: 18px; }
+.final ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+.final li { background: var(--navy-2); border-radius: 16px; padding: 18px; font-weight: 700; line-height: 1.3; }
+.final li .icon { color: #7fb0ff; width: 28px; height: 28px; display: block; margin-bottom: 10px; }
+.final li small { display: block; font-weight: 500; color: #c3cfee; font-size: .85rem; margin-top: 4px; }
+@media (min-width: 960px) { .final .wrap { grid-template-columns: 1.15fr .85fr; } }
+footer { background: var(--navy); color: #9fb0d8; border-top: 1px solid #1d2c5c; padding: 28px 0; font-size: .85rem; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; }
+footer .logo { color: #fff; font-size: 1.3rem; }
+footer .logo small { color: #9fb0d8; }
+
+/* Reveal on scroll */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .js .reveal.in { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l1.5-2.5h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+    <symbol id="i-tent" viewBox="0 0 24 24"><path d="M12 4 3 20h18L12 4z"/><path d="M12 12v8"/></symbol>
+    <symbol id="i-tools" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5l-6 6M5 19l5-5"/><path d="M16 3l5 5-2 2-5-5zM3 3l4 1 1 4"/></symbol>
+    <symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3v18M5.6 5.6c3 3 3 9.800 0 12.800M18.400 5.600c-3 3-3 9.800 0 12.800"/></symbol>
+    <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.500"/><path d="M2 19h20"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.500" y="5" width="17" height="15" rx="2"/><path d="M3.500 10h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-hanger" viewBox="0 0 24 24"><path d="M12 9V7.500a2 2 0 1 0-2-2"/><path d="M12 9 3 16.500V18h18v-1.500L12 9z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.500 16.500 4.500 4.500"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5M12 11v6M9 14h6"/></symbol>
+    <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M12 5.500v5M10.300 9.500h2.500a1 1 0 0 0 0-2h-1.600a1 1 0 0 1 0-2h2.500"/><path d="M3 17h4l4 2h6a2 2 0 0 0 2-2l2-1.500"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.500-4 4.500-5.500 8-5.500s6.500 1.500 8 5.500"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.500"/><path d="M2.500 19c1-3.500 3.500-5 6.500-5s5.500 1.500 6.500 5"/><circle cx="17" cy="9" r="2.500"/><path d="M17.500 14c2 .300 3.500 1.700 4 4"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.500 2h-15zM10 21h4"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M4 7h15a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h11v3"/><path d="M16 13h2"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4.500 6v6c0 4.500 3 7.500 7.500 9 4.500-1.500 7.500-4.500 7.500-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.500"/><circle cx="18" cy="6" r="2.500"/><circle cx="18" cy="18" r="2.500"/><path d="m8.200 10.800 7.600-3.600M8.200 13.200l7.600 3.600"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.500 12 2.500 2.500 4.500-5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.500"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5.500" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/></symbol>
+    <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h14l-3-3M20 16H6l3 3"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19c0-9 5-14 15-14 0 10-5 15-14 14z"/><path d="M4 21 14 11"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M5 20v-5M10.500 20v-9M16 20V7M21 20H3"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
+    <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M4 10v4l3 .500L16 19V5L7 9.500zM7 14.500V19h3v-3.500M19 9.500v5"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M3 20h18M5 20V10M9.500 20V10M14.500 20V10M19 20V10M3 10l9-6 9 6z"/></symbol>
+  </defs>
+</svg>
+
+<header class="nav" id="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="RentCo home">Rent<span class="blue">Co</span><small>by AFSA FAM VENTURES</small></a>
+    <nav aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#sides">Rent &amp; earn</a>
+      <a href="#campus">For campuses</a>
+      <a href="#compare">Why RentCo</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn small" href="#join">Get early access</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Peer-to-peer rental marketplace</p>
+      <h1>What You Have, <span class="blue">Someone Needs.</span></h1>
+      <p class="tag">Own Smarter. Access Better.</p>
+      <p class="lede">RentCo is a trusted peer-to-peer rental marketplace that connects people who have underutilized items with those who need temporary access — starting on campus.</p>
+      <form class="signup" novalidate>
+        <div class="row">
+          <div>
+            <label for="email-hero">Email address</label>
+            <input id="email-hero" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@university.edu.my" required>
+          </div>
+          <div>
+            <label for="role-hero">I am a…</label>
+            <select id="role-hero" name="role">
+              <option value="student">Student</option>
+              <option value="owner">Asset owner</option>
+              <option value="society">Club / society</option>
+              <option value="partner">University / partner</option>
+            </select>
+          </div>
+          <button class="btn" type="submit">Get early access</button>
+        </div>
+        <p class="status" role="status" aria-live="polite"></p>
+        <p class="note">Be first to know when RentCo opens on your campus. No spam.</p>
+      </form>
+      <p class="triad">PEOPLE &nbsp;×&nbsp; ASSETS &nbsp;×&nbsp; OPPORTUNITIES</p>
+    </div>
+
+    <div class="stage" role="img" aria-label="Preview of the RentCo app home screen with categories and featured items nearby">
+      <div class="phone" aria-hidden="true">
+        <div class="screen">
+          <div class="app">
+            <div class="top"><b>Rent<span class="blue">Co</span></b><svg class="icon"><use href="#i-bell"/></svg></div>
+            <div class="search"><svg class="icon"><use href="#i-search"/></svg>What do you need today?</div>
+            <div class="cats">
+              <div><span><svg class="icon"><use href="#i-camera"/></svg></span>Cameras</div>
+              <div><span><svg class="icon"><use href="#i-tent"/></svg></span>Outdoor</div>
+              <div><span><svg class="icon"><use href="#i-tools"/></svg></span>Tools</div>
+              <div><span><svg class="icon"><use href="#i-ball"/></svg></span>Sports</div>
+            </div>
+            <div class="row">Featured Near You <em>See All</em></div>
+            <div class="items">
+              <div><img src="assets/idle-camera.jpg" alt="" width="581" height="267" fetchpriority="high"><b>Mirrorless camera</b><i>RM 90 <span>/ day</span></i></div>
+              <div><img src="assets/idle-tent.jpg" alt="" width="581" height="263"><b>Camping tent</b><i>RM 25 <span>/ day</span></i></div>
+            </div>
+          </div>
+          <div class="tabs">
+            <div class="on"><svg class="icon"><use href="#i-home"/></svg>Home</div>
+            <div><svg class="icon"><use href="#i-search"/></svg>Explore</div>
+            <div><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span>List</div>
+            <div><svg class="icon"><use href="#i-calendar"/></svg>Bookings</div>
+            <div><svg class="icon"><use href="#i-user"/></svg>Profile</div>
+          </div>
+        </div>
+      </div>
+      <div class="float one" aria-hidden="true"><span class="badge"><svg class="icon"><use href="#i-shield"/></svg></span><span>Verified owner<small>Ratings on every listing</small></span></div>
+      <div class="float two" aria-hidden="true"><span class="badge"><svg class="icon"><use href="#i-coin"/></svg></span><span>Earn from idle items<small>List in minutes</small></span></div>
+      <p class="cap">App preview. Sample listings and prices.</p>
+    </div>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">The problem</p>
+      <h2>We own more <span class="blue">than we use.</span></h2>
+      <p class="lede">Useful items sit idle most of the year, while someone nearby needs exactly that thing — for a day, a weekend, a single task.</p>
+    </div>
+    <div class="grid g4">
+      <div class="card pair reveal">
+        <figure><img src="assets/idle-camera.jpg" alt="A camera sitting on a shelf" width="581" height="267" loading="lazy"><figcaption>Used occasionally</figcaption></figure>
+        <div class="to"><svg class="icon"><use href="#i-arrow"/></svg>Someone needs it</div>
+        <figure><img src="assets/need-camera.jpg" alt="A photographer shooting a city skyline" width="583" height="267" loading="lazy"><figcaption>Need it for a day</figcaption></figure>
+      </div>
+      <div class="card pair reveal">
+        <figure><img src="assets/idle-drill.jpg" alt="A cordless drill on a storage shelf" width="583" height="267" loading="lazy"><figcaption>Sits unused</figcaption></figure>
+        <div class="to"><svg class="icon"><use href="#i-arrow"/></svg>Someone needs it</div>
+        <figure><img src="assets/need-drill.jpg" alt="A person assembling furniture with a drill" width="583" height="267" loading="lazy"><figcaption>One-time task</figcaption></figure>
+      </div>
+      <div class="card pair reveal">
+        <figure><img src="assets/idle-tent.jpg" alt="Camping gear packed away in storage" width="581" height="263" loading="lazy"><figcaption>Stored most of the time</figcaption></figure>
+        <div class="to"><svg class="icon"><use href="#i-arrow"/></svg>Someone needs it</div>
+        <figure><img src="assets/need-tent.jpg" alt="Friends hiking toward the mountains" width="583" height="263" loading="lazy"><figcaption>Weekend use</figcaption></figure>
+      </div>
+      <div class="card pair reveal">
+        <figure><img src="assets/idle-racket.jpg" alt="A tennis racket and balls left in storage" width="583" height="263" loading="lazy"><figcaption>Owned but underutilized</figcaption></figure>
+        <div class="to"><svg class="icon"><use href="#i-arrow"/></svg>Someone needs it</div>
+        <figure><img src="assets/need-racket.jpg" alt="A tennis player on court" width="583" height="263" loading="lazy"><figcaption>Occasional activity</figcaption></figure>
+      </div>
+    </div>
+    <div class="pains reveal">
+      <div><span class="badge"><svg class="icon"><use href="#i-wallet"/></svg></span>Buying is expensive</div>
+      <div><span class="badge"><svg class="icon"><use href="#i-users"/></svg></span>Borrowing is inconvenient</div>
+      <div><span class="badge"><svg class="icon"><use href="#i-clock"/></svg></span>Short-term need, long-term cost</div>
+    </div>
+    <p class="claim reveal">Access is needed. <span class="blue">Ownership is not.</span></p>
+  </div>
+</section>
+
+<section id="how" class="white">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">The solution</p>
+      <h2>Meet <span class="blue">RentCo.</span></h2>
+      <p class="lede">One place to list, rent and earn. Find it. Rent it. Use it — without having to own it.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card step reveal"><span class="n">1</span><svg class="icon"><use href="#i-doc"/></svg><h3>List</h3><p>Got something sitting around? Put it on RentCo in minutes and set your own daily price.</p></div>
+      <div class="card step reveal"><span class="n">2</span><svg class="icon"><use href="#i-search"/></svg><h3>Rent</h3><p>Search what's near you, compare options and book with ease — all inside the app.</p></div>
+      <div class="card step reveal"><span class="n">3</span><svg class="icon"><use href="#i-coin"/></svg><h3>Earn &amp; access</h3><p>Owners earn income from idle items. Renters get what they need without the cost of ownership.</p></div>
+    </div>
+    <p class="cats-title reveal">Popular categories</p>
+    <ul class="cats-list reveal">
+      <li><svg class="icon"><use href="#i-camera"/></svg>Cameras &amp; Gear</li>
+      <li><svg class="icon"><use href="#i-ball"/></svg>Sports &amp; Recreation</li>
+      <li><svg class="icon"><use href="#i-tent"/></svg>Outdoor &amp; Camping</li>
+      <li><svg class="icon"><use href="#i-laptop"/></svg>Electronics &amp; Tech</li>
+      <li><svg class="icon"><use href="#i-tools"/></svg>Tools &amp; DIY</li>
+      <li><svg class="icon"><use href="#i-calendar"/></svg>Events &amp; Production</li>
+      <li><svg class="icon"><use href="#i-hanger"/></svg>Fashion &amp; Lifestyle</li>
+      <li><svg class="icon"><use href="#i-plus"/></svg>And more</li>
+    </ul>
+  </div>
+</section>
+
+<section id="sides">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">Two sides, one account</p>
+      <h2>Rent what you need. <span class="blue">Earn from what you own.</span></h2>
+    </div>
+    <div class="grid g2">
+      <div class="card side reveal">
+        <h3>For renters</h3>
+        <p>Get quality gear for the shoot, the trip or the event — and hand it back when you're done.</p>
+        <ul>
+          <li><svg class="icon"><use href="#i-check"/></svg>Pay for the day you need it, not the years you won't</li>
+          <li><svg class="icon"><use href="#i-check"/></svg>Rent from verified people in your own community</li>
+          <li><svg class="icon"><use href="#i-check"/></svg>See ratings before you book</li>
+          <li><svg class="icon"><use href="#i-check"/></svg>Pay securely in the app — no awkward cash handovers</li>
+        </ul>
+      </div>
+      <div class="card side owner reveal">
+        <h3>For owners</h3>
+        <p>That camera, tent or drill could be paying for itself. You decide what to list and when.</p>
+        <div class="split">
+          <div><b>RM100</b><span>Renter pays</span></div>
+          <svg class="icon"><use href="#i-arrow"/></svg>
+          <div><b>RM85</b><span>You receive</span></div>
+        </div>
+        <p class="fine">Illustrative example based on a RM100 rental value, with a 15% RentCo commission.</p>
+        <ul>
+          <li><svg class="icon"><use href="#i-check"/></svg>List in minutes</li>
+          <li><svg class="icon"><use href="#i-check"/></svg>Rent to verified, rated members</li>
+          <li><svg class="icon"><use href="#i-check"/></svg>Tools to manage and track your bookings</li>
+        </ul>
+      </div>
+    </div>
+    <div class="both reveal">
+      <span class="badge"><svg class="icon"><use href="#i-swap"/></svg></span>
+      <div><h3>One RentCo account can be both <span class="blue">owner and renter.</span></h3><p>Monetize what you have and access what you need, from the same profile.</p></div>
+    </div>
+    <div class="cta-line reveal">
+      <a class="btn" href="#join">Join the early access list</a>
+      <span>Opening campus by campus.</span>
+    </div>
+  </div>
+</section>
+
+<section id="campus" class="white">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">Built for campus first</p>
+      <h2>Start where sharing <span class="blue">already makes sense.</span></h2>
+      <p class="lede">A university is a dense, trusted community where short-term needs come up every week and the gear to meet them already exists a few doors away.</p>
+    </div>
+    <div class="campus">
+      <div class="grid g2">
+        <div class="card mini reveal"><span class="badge"><svg class="icon"><use href="#i-camera"/></svg></span><div><h3>Cameras &amp; creators</h3><p>Cameras, lenses, lighting and more.</p></div></div>
+        <div class="card mini reveal"><span class="badge"><svg class="icon"><use href="#i-users"/></svg></span><div><h3>Events &amp; societies</h3><p>Event equipment, decor and supplies.</p></div></div>
+        <div class="card mini reveal"><span class="badge"><svg class="icon"><use href="#i-ball"/></svg></span><div><h3>Sports gear</h3><p>Tennis, fitness, cycling and more.</p></div></div>
+        <div class="card mini reveal"><span class="badge"><svg class="icon"><use href="#i-laptop"/></svg></span><div><h3>Electronics</h3><p>Laptops, tablets, consoles and more.</p></div></div>
+        <div class="card mini reveal"><span class="badge"><svg class="icon"><use href="#i-tools"/></svg></span><div><h3>Tools &amp; outdoor</h3><p>DIY tools, camping and outdoor gear.</p></div></div>
+        <div class="card mini reveal"><span class="badge"><svg class="icon"><use href="#i-pin"/></svg></span><div><h3>Campus pickup points</h3><p>Designated on-campus locations for handovers.</p></div></div>
+      </div>
+      <div class="card why reveal">
+        <div><span class="badge"><svg class="icon"><use href="#i-users"/></svg></span><span><h3>High-density community</h3><p>Thousands of students in one compact place.</p></span></div>
+        <div><span class="badge"><svg class="icon"><use href="#i-clock"/></svg></span><span><h3>Frequent short-term needs</h3><p>From weekend projects to one-time events.</p></span></div>
+        <div><span class="badge"><svg class="icon"><use href="#i-shield"/></svg></span><span><h3>Verified community trust</h3><p>Shared identity and stronger accountability.</p></span></div>
+        <div><span class="badge"><svg class="icon"><use href="#i-share"/></svg></span><span><h3>Word of mouth</h3><p>Good experiences travel fast between friends.</p></span></div>
+      </div>
+    </div>
+    <div class="both reveal">
+      <span class="badge"><svg class="icon"><use href="#i-building"/></svg></span>
+      <div><h3>Universities, societies and campus SMEs</h3><p>RentCo can be the rental infrastructure for your campus: digital booking, secure cashless payments, trust and verification, and rental management for students, departments and events. <a href="#join" class="blue"><b>Talk to us about partnering</b></a>.</p></div>
+    </div>
+    <p class="script reveal" style="margin-top:40px">Same campus. More possibilities.</p>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">Why RentCo</p>
+      <h2>A better way <span class="blue">to rent.</span></h2>
+      <p class="lede">The trust of a community with the convenience of a platform — built for the next generation.</p>
+    </div>
+    <div class="table-wrap reveal" tabindex="0" role="region" aria-label="How RentCo compares to other ways of renting">
+      <table>
+        <thead><tr><th scope="col">Key factors</th><th scope="col">Traditional rental companies</th><th scope="col">Classifieds / general marketplaces</th><th scope="col">Niche rental apps</th><th scope="col" class="us">RentCo</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Asset variety</th><td>Limited categories</td><td class="y">Very broad, unstructured</td><td class="n">Limited to a specific niche</td><td class="us y">Wide range, daily needs to premium</td></tr>
+          <tr><th scope="row">Who it's for</th><td class="n">General public</td><td class="n">General public</td><td class="n">General public</td><td class="us y">Students, communities, SMEs</td></tr>
+          <tr><th scope="row">Trust &amp; verification</th><td class="y">Limited</td><td class="n">Low</td><td class="y">Moderate</td><td class="us y">Built-in verification &amp; ratings</td></tr>
+          <tr><th scope="row">Transaction security</th><td>Varies</td><td>Limited</td><td class="y">Moderate</td><td class="us y">Secure in-app payments &amp; protection</td></tr>
+          <tr><th scope="row">Location</th><td class="n">Physical outlets only</td><td>Wide, not focused</td><td>Varies</td><td class="us y">Starts on campus, expands outward</td></tr>
+          <tr><th scope="row">Additional services</th><td class="n">Usually none</td><td class="n">None</td><td class="n">Limited</td><td class="us y">Delivery, insurance, subscriptions, business tools</td></tr>
+          <tr><th scope="row">Community impact</th><td class="n">Low</td><td class="n">Low</td><td class="y">Moderate</td><td class="us y">Promotes sharing, sustainability &amp; community</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="legend"><i style="background:var(--ok)"></i>Strong<i style="background:#9aa6c0"></i>Partial or varies<i style="background:var(--no)"></i>Weak</p>
+  </div>
+</section>
+
+<section id="faq" class="white">
+  <div class="wrap faq">
+    <div class="head reveal">
+      <p class="eyebrow">Questions</p>
+      <h2>Before you <span class="blue">join.</span></h2>
+    </div>
+    <details class="reveal"><summary>Is it safe to rent out my things?</summary><p>Trust is built into RentCo: users and listings are verified, every member carries ratings, and payments are handled securely in the app. Optional protection and insurance cover is part of the plan for extra peace of mind.</p></details>
+    <details class="reveal"><summary>What does it cost?</summary><p>Listing is how you earn, not something you pay for upfront. RentCo takes a commission on each completed booking — for example, on a RM100 rental the owner receives RM85 and RentCo keeps RM15. That figure is illustrative and final pricing will be confirmed at launch.</p></details>
+    <details class="reveal"><summary>What can I list?</summary><p>Anything useful that sits idle: cameras and gear, sports equipment, outdoor and camping kit, electronics, tools, event equipment, fashion and more.</p></details>
+    <details class="reveal"><summary>Do I need separate accounts to rent and to list?</summary><p>No. One RentCo account lets you be both an owner and a renter.</p></details>
+    <details class="reveal"><summary>Where is RentCo available?</summary><p>We're starting with university communities in Malaysia and growing campus by campus, then out to wider communities and SMEs. Join the early access list and tell us where you are so we know where to open next.</p></details>
+    <details class="reveal"><summary>We're a university, society or business. Can we work with you?</summary><p>Yes. Choose "University / partner" or "Club / society" in the form below and we'll get in touch about partnerships, campus ambassadors and pickup points.</p></details>
+  </div>
+</section>
+
+<section id="join" class="dark final">
+  <div class="wrap">
+    <div>
+      <p class="script">Same things. A brighter tomorrow.</p>
+      <h2>Let's build this <span style="color:#7fb0ff">together.</span></h2>
+      <p class="lede">We're not just building a rental platform — we're building opportunities, communities and a more sustainable future for Malaysia. Get early access, or tell us you'd like to partner.</p>
+      <form class="signup" novalidate>
+        <div class="row">
+          <div>
+            <label for="email-final">Email address</label>
+            <input id="email-final" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@university.edu.my" required>
+          </div>
+          <div>
+            <label for="role-final">I am a…</label>
+            <select id="role-final" name="role">
+              <option value="student">Student</option>
+              <option value="owner">Asset owner</option>
+              <option value="society">Club / society</option>
+              <option value="partner">University / partner</option>
+            </select>
+          </div>
+          <button class="btn light" type="submit">Get early access</button>
+        </div>
+        <p class="status" role="status" aria-live="polite"></p>
+        <p class="note">We'll only email you about RentCo. Unsubscribe any time.</p>
+      </form>
+    </div>
+    <ul>
+      <li><svg class="icon"><use href="#i-users"/></svg>More access<small>For students, communities and everyone.</small></li>
+      <li><svg class="icon"><use href="#i-leaf"/></svg>More value<small>From idle items sitting around.</small></li>
+      <li><svg class="icon"><use href="#i-chart"/></svg>More opportunities<small>For individuals, SMEs and campuses.</small></li>
+      <li><svg class="icon"><use href="#i-globe"/></svg>More sustainable<small>A sharing-first rental economy in Malaysia.</small></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top">Rent<span style="color:#7fb0ff">Co</span><small>by AFSA FAM VENTURES</small></a>
+    <span>Own Smarter. Access Better.</span>
+    <span>© <span id="year">2026</span> AFSA FAM VENTURES</span>
+  </div>
+</footer>
+
+<script>
+// Where sign-ups are sent. Set to a form backend URL that accepts a JSON POST
+// (e.g. a Formspree endpoint). While empty, the form reports that it isn't connected.
+const SIGNUP_ENDPOINT = "";
+
+document.documentElement.classList.add("js");
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const nav = document.querySelector("header.nav");
+const onScroll = () => nav.classList.toggle("stuck", window.scrollY > 8);
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+
+const io = new IntersectionObserver((entries) => {
+  for (const e of entries) if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+}, { rootMargin: "0px 0px -8% 0px" });
+document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+document.querySelectorAll("form.signup").forEach((form) => {
+  const email = form.elements.email;
+  const status = form.querySelector(".status");
+  const say = (msg, kind) => { status.textContent = msg; status.className = "status " + kind; };
+
+  form.addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const valid = email.validity.valid;
+    email.setAttribute("aria-invalid", String(!valid));
+    if (!valid) { say("Please enter a valid email address.", "err"); email.focus(); return; }
+    if (!SIGNUP_ENDPOINT) { say("Sign-ups aren't connected yet. Please check back soon.", "err"); return; }
+
+    const btn = form.querySelector("button");
+    btn.disabled = true;
+    try {
+      const res = await fetch(SIGNUP_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ email: email.value.trim(), role: form.elements.role.value }),
+      });
+      if (!res.ok) throw new Error(res.status);
+      form.reset();
+      say("You're on the list. We'll be in touch when RentCo opens near you.", "ok");
+    } catch {
+      say("Something went wrong. Please try again in a moment.", "err");
+    } finally {
+      btn.disabled = false;
+    }
+  });
+});
+</script>
+</body>
+</html>
