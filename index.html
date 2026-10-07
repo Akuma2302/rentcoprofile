@@ -129,7 +129,11 @@ header.nav.stuck { border-color: var(--line); }
 .float .icon { width: 18px; height: 18px; }
 .float.one { top: 66%; left: -40px; display: none; }
 .float.two { top: 4%; right: -6px; }
-.stage .cap { position: absolute; bottom: -34px; font-size: .78rem; color: var(--muted); }
+.stage .cap { position: absolute; bottom: -38px; font-size: .82rem; color: var(--muted); }
+.stage .cap a { color: var(--blue); font-weight: 700; text-decoration: none; }
+.stage .cap a:hover { text-decoration: underline; }
+.phone-link { display: block; border-radius: 46px; text-decoration: none; color: inherit; transition: transform .2s ease; }
+.phone-link:hover { transform: translateY(-4px); }
 @media (min-width: 960px) { .float.one { display: flex; } }
 
 /* Cards & grids */
@@ -347,7 +351,8 @@ footer .logo small { color: #9fb0d8; }
       <p class="triad">PEOPLE &nbsp;×&nbsp; ASSETS &nbsp;×&nbsp; OPPORTUNITIES</p>
     </div>
 
-    <div class="stage" role="img" aria-label="Preview of the RentCo app home screen with categories and featured items nearby">
+    <div class="stage">
+      <a class="phone-link" href="https://rentcobyafsa.netlify.app/" target="_blank" rel="noopener" aria-label="Open the RentCo prototype in a new tab">
       <div class="phone" aria-hidden="true">
         <div class="screen">
           <div class="app">
@@ -374,9 +379,10 @@ footer .logo small { color: #9fb0d8; }
           </div>
         </div>
       </div>
+      </a>
       <div class="float one" aria-hidden="true"><span class="badge"><svg class="icon"><use href="#i-shield"/></svg></span><span>Verified owner<small>Ratings on every listing</small></span></div>
       <div class="float two" aria-hidden="true"><span class="badge"><svg class="icon"><use href="#i-coin"/></svg></span><span>Earn from idle items<small>List in minutes</small></span></div>
-      <p class="cap">App preview. Sample listings and prices.</p>
+      <p class="cap">Sample listings and prices. <a href="https://rentcobyafsa.netlify.app/" target="_blank" rel="noopener">Try the prototype &rarr;</a></p>
     </div>
   </div>
 </section>
@@ -565,7 +571,7 @@ footer .logo small { color: #9fb0d8; }
         </ul>
       </div>
       <div class="card member reveal">
-        <div class="avatar" aria-hidden="true">AA</div>
+        <img class="avatar" src="assets/team-akmal.jpg" alt="Ahmad Akmal Asyraaf Bin Shamsul Azhar" width="361" height="361" loading="lazy">
         <h3>Ahmad Akmal Asyraaf Bin Shamsul Azhar</h3>
         <p class="role">Head of IT Department</p>
         <ul>
@@ -576,12 +582,14 @@ footer .logo small { color: #9fb0d8; }
         </ul>
       </div>
       <div class="card member reveal">
-        <div class="avatar" aria-hidden="true">MF</div>
+        <img class="avatar" src="assets/team-fahim.jpg" alt="Muhammad Fahim bin Muhammad Noruladzim" width="361" height="361" loading="lazy">
         <h3>Muhammad Fahim bin Muhammad Noruladzim</h3>
         <p class="role">Chief Operating Officer</p>
         <ul>
           <li><a href="tel:+60137220824"><svg class="icon"><use href="#i-phone"/></svg>013-722 0824</a></li>
           <li><a href="mailto:mfrccrater@gmail.com"><svg class="icon"><use href="#i-mail"/></svg>mfrccrater@gmail.com</a></li>
+          <li><a href="https://www.instagram.com/fahim_adzim/" target="_blank" rel="noopener"><svg class="icon"><use href="#i-insta"/></svg>@fahim_adzim</a></li>
+          <li><svg class="icon"><use href="#i-pin"/></svg>Bukit Rimau, 40460 Shah Alam, Selangor</li>
         </ul>
       </div>
     </div>
